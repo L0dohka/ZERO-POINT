@@ -19,22 +19,20 @@ jobs:
       with:
         targets: aarch64-linux-android
 
-    - name: Set up Android NDK
-      uses: android-actions/setup-android@v3
-      with:
-        ndk-version: '25.2.9519653' # Стандартная стабильная версия NDK
-
     - name: Install cargo-apk
       run: cargo install cargo-apk
 
     - name: Build Android APK
       run: cargo apk build --release
+      env:
+        ANDROID_NDK_ROOT: ${{ env.ANDROID_NDK_LATEST_HOME }}
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: rust-android-apk
         path: target/debug/apk/*.apk
+
 
 
 
