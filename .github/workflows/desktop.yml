@@ -24,6 +24,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: bevy-windows-game
-        path: "target/**/*.exe"
-
-  
+        path: |
+          target/release/ИМЯ_ТВОЕГО_ПРОЕКТА.exe
+          assets
