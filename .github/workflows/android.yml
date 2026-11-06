@@ -20,9 +20,9 @@ jobs:
         targets: aarch64-linux-android
 
     - name: Setup Android NDK
-      uses: mymindstorm/setup-ndk@v1
+      uses: android-actions/setup-android@v3
       with:
-        ndk-version: r25c # Стабильная версия, с которой отлично работает cargo-apk
+        cmdline-tools-version: '11.0' # Фиксируем версию инструментов, чтобы не было конфликтов
 
     - name: Install cargo-apk
       run: cargo install cargo-apk
@@ -35,13 +35,6 @@ jobs:
       with:
         name: rust-android-apk
         path: target/aarch64-linux-android/release/apk/*.apk
-
-
-
-
-
-
-
 
 
 
