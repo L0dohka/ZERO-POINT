@@ -38,7 +38,8 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: rust-android-apk
-        path: target/aarch64-linux-android/debug/apk/*.apk
+        path: "target/**/*.apk"
+
 
 
 
