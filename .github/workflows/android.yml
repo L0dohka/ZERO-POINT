@@ -26,13 +26,13 @@ jobs:
         run: cargo install cargo-apk
 
       - name: Build APK
-        run: cargo apk build --release
+        run: cargo apk build
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: game-apk
-          path: target/adventure/release/apk/*.apk
+          path: target/adventure/debug/apk/*.apk
 
 
 
