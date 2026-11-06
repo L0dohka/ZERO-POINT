@@ -1,4 +1,5 @@
 fn main() {
-    zero_point::run();
+    zero_point::main();
 }
+
 
