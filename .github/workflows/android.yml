@@ -32,7 +32,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: game-apk
-          path: target/adventure/debug/apk/*.apk
+          path: target/zero_point/debug/apk/*.apk
+
 
 
 
