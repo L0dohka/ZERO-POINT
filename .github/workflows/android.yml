@@ -19,22 +19,26 @@ jobs:
       with:
         targets: aarch64-linux-android
 
-    - name: Setup Android NDK
-      uses: android-actions/setup-android@v3
-      with:
-        cmdline-tools-version: '11.0' # Фиксируем версию инструментов, чтобы не было конфликтов
-
     - name: Install cargo-apk
       run: cargo install cargo-apk
 
     - name: Build Android APK
-      run: cargo apk build --release
+      run: |
+        # Автоматически находим путь к любой установленной версии NDK на виртуалке
+        NDK_PATH=$(find /usr/local/lib/android/sdk/ndk -maxdepth 1 -mindepth 1 -type d | head -n 1)
+        echo "Found NDK at: $NDK_PATH"
+        
+        # Запускаем сборку с правильными переменными окружения
+        export ANDROID_HOME=/usr/local/lib/android/sdk
+        export ANDROID_NDK_ROOT=$NDK_PATH
+        cargo apk build --release
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: rust-android-apk
         path: target/aarch64-linux-android/release/apk/*.apk
+
 
 
 
