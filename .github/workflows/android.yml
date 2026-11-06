@@ -24,23 +24,22 @@ jobs:
 
     - name: Build Android APK
       run: |
-        # Устанавливаем нужную для cargo-apk платформу 30
         yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=/usr/local/lib/android/sdk "platforms;android-30"
         
-        # Находим путь к NDK
         NDK_PATH=$(find /usr/local/lib/android/sdk/ndk -maxdepth 1 -mindepth 1 -type d | head -n 1)
         echo "Found NDK at: $NDK_PATH"
         
         export ANDROID_HOME=/usr/local/lib/android/sdk
         export ANDROID_NDK_ROOT=$NDK_PATH
         
-        cargo apk build --release
+        cargo apk build
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: rust-android-apk
-        path: target/aarch64-linux-android/release/apk/*.apk
+        path: target/aarch64-linux-android/debug/apk/*.apk
+
 
 
 
