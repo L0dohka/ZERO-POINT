@@ -19,20 +19,23 @@ jobs:
       with:
         targets: aarch64-linux-android
 
+    - name: Setup Android NDK
+      uses: mymindstorm/setup-ndk@v1
+      with:
+        ndk-version: r25c # Стабильная версия, с которой отлично работает cargo-apk
+
     - name: Install cargo-apk
       run: cargo install cargo-apk
 
     - name: Build Android APK
       run: cargo apk build --release
-      env:
-        ANDROID_HOME: /usr/local/lib/android/sdk
-        ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/25.2.9519653
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: rust-android-apk
         path: target/aarch64-linux-android/release/apk/*.apk
+
 
 
 
