@@ -12,6 +12,6 @@ bevy = "0.14"
 [package.metadata.android]
 package = "com.lodohka.zeropoint"
 label = "Zero Point"
-assets = "assets"
+
 
 
